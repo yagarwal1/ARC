@@ -1,5 +1,20 @@
 #!/usr/bin/python
 
+"""NUI Galway CT5132/CT5148 Programming and Tools for AI (James McDermott)
+
+Solution for Assignment 3
+
+By writing my name below and submitting this file, I/we declare that
+all additions to the provided skeleton file are my/our own work, and that
+I/we have not seen any work on this assignment by another student/group.
+
+Student name(s):Yashitha Agarwal
+Student ID(s): 20230091
+
+GitHub Repository Link: https://github.com/yagarwal1/ARC
+
+"""
+
 import os, sys
 import json
 import numpy as np
@@ -10,14 +25,25 @@ import re
 ### result. Name them according to the task ID as in the three
 ### examples below. Delete the three examples. The tasks you choose
 ### must be in the data/training directory, not data/evaluation.
+
 def solve_c8cbb738(x):
     return x
+
 
 def solve_06df4c85(x):
     return x
 
+
 def solve_3631a71a(x):
     return x
+
+
+def solve_0d3d703e(x):
+    x_res = x.copy()    
+    map_dict = {1 : 5, 2 : 6, 3 : 4, 8 : 9}
+    for k, v in map_dict.items():
+        x_res = np.where(x == k, v, x_res) if np.any(x == k) else np.where(x == v, k, x_res)
+    return x_res
 
 
 def main():

@@ -334,3 +334,24 @@ def show_result(x, y, yhat):
 
 if __name__ == "__main__": main()
 
+"""
+SUMMARY:
+
+All the tasks have been solved using the hand-coded python functions, which are task specific. Each function has a single 
+task-specific logic which has been used to successfully solve all the training and test grids. NumPy library has been used 
+in the code as it makes working with arrays much easier and simpler. The functions for all the tasks make use of various 
+numpy functions, such as numpy.where(), numpy.transpose() and numpy.unique(). Among the many numpy functions used, I 
+believe numpy.where() has been used the most throughout the entire program. Also, numpy.transpose() was a highly useful 
+function as it outputs a view of the original array. This makes it extremely easy to work with transposed matrices without 
+the hassles of re-transposing the matrix as all the changes made to the transposed matrix are duplicated to the original 
+matrix. Apart from the NumPy functions, Python features like list comprehensions and single-line 'for', 'if' loops have 
+also been used throughout the program. 
+
+The Abstraction and Reasoning Corpus has a vast variety of tasks with varied levels of difficulty. Most of the tasks work 
+by finding and replacing certain cells of the grid or certain indices of the cells. Also, there are a few tasks which 
+follow the same logic, with a slight difference. For instance, tasks 2 and 3 explained above share the same high-level 
+logic, which means that if an AI agent is trained on a set of high-level logics and also on techniques of tweaking the 
+code to try different combinations, to use ARC as a benchmark for comparing general intelligence betwen AI systems and 
+humans.
+
+"""

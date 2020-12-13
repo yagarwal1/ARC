@@ -14,6 +14,12 @@ Student ID(s): 20230091
 
 GitHub Repository Link: https://github.com/yagarwal1/ARC
 
+Please find the updated README.md in the above repository link
+
+Contents added in README.md: Purpose of repository, Task description, Summary
+
+NB: The summary has been added at the end of this file as well
+
 """
 
 import os, sys
@@ -332,8 +338,6 @@ def show_result(x, y, yhat):
     # shape, then y == yhat is just a single bool.
     print(np.all(y == yhat))
 
-if __name__ == "__main__": main()
-
 """
 SUMMARY:
 
@@ -355,3 +359,5 @@ code to try different combinations, to use ARC as a benchmark for comparing gene
 humans.
 
 """
+
+if __name__ == "__main__": main()

@@ -5,12 +5,12 @@ NUI Galway CT5132 Programming and Tools for AI (James McDermott)
 
 Solution for Assignment 3
 
-By writing my name below and submitting this file, I/we declare that
-all additions to the provided skeleton file are my/our own work, and that
-I/we have not seen any work on this assignment by another student/group.
+By writing my name below and submitting this file, I declare that
+all additions to the provided skeleton file are my own work, and that
+I have not seen any work on this assignment by another student/group.
 
-Student name(s):Yashitha Agarwal
-Student ID(s): 20230091
+Student name:Yashitha Agarwal
+Student ID: 20230091
 
 GitHub Repository Link: https://github.com/yagarwal1/ARC
 

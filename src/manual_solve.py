@@ -27,7 +27,63 @@ import re
 ### must be in the data/training directory, not data/evaluation.
 
 def solve_c8cbb738(x):
-    return x
+    '''
+    Difficulty: Difficult
+    
+    On analysing this task using the manual ARC testing interface, it can be seen that each input grid has a sub set of
+    n-dimensional grids, having 4 colour values each, that need to be superimposed together to generate the required 
+    (n x n) output grid. To achieve this, first the unique colours are obtained by fetching the counts of all the unique
+    numbers (colours) in the numpy array, and selecting the colours with the count of 4. Then, the dimension of the
+    output grid needs to be calculated, which can be done as follows:
+    
+    number of rows (or) columns of unique colours = maximum(colour_index) - minimum(colour_index), 
+    for all the above unique colours (i.e count = 4)
+    
+    output array dimension, n = maximum(number of rows (or) columns of unique colours)
+    
+    The maximum of the difference between the maximum and minimum values of the number of rows/columns among all the 
+    colours (sub set matrices) in the given input grid, gives the dimension for the output array. The background colour 
+    can be obtained by fetching the unique colour with highest count. With the dimension and the background colour,
+    a n X n base matrix with values of the background colour can be generated with the np.full() function.  
+    
+    Now, the np.where() function can be used to modify the output matrix based on the if-elif-else condition. For sub
+    sets that have a shape different from shape of the output matrix, the start and end rows where the sub set should be
+    merged on the output matrix should be specified. This is done using the function 'replace_colour' with the logic to 
+    find the start row index by dividing the number of rows of the output array and the sub set array. The end row index
+    is calculated by adding the start row index with the number of rows in the sub set array. For eg., if the output array 
+    is a 7 x 7 matrix and the subset is 3 x 7, then start row is (7 // 3) which is 2, and end row is (2 + 3) = 5. If the 
+    column value of sub set is less than the column value of the output matrix, the matrices are transposed before being 
+    passed to the 'replace_colour' function to perform the same logic outlined above.
+        
+    '''
+
+    (unique, counts) = np.unique(x, return_counts=True) # Fetch the unique colours and their count as a tuple
+    colours = unique[counts == 4] # Unique colours except the background
+
+    res_dim = max([(max(np.where(x == c)[0]) - min(np.where(x == c)[0])) for c in colours]) + 1 # Output array dimension
+    x_res = np.full((res_dim, res_dim), unique[np.argmax(counts)]) # Output matrix with the background colour filled
+
+    # Function to modify the output array when the shape of output array is different from the shape of subset array
+    def replace_colour(original_array, result_array):
+        s_row = min(result_array.shape) // min(original_array.shape) # Starting row index to be modified - for output array
+        e_row = s_row + min(original_array.shape) # Ending row index to be modified - for output array
+        result_array[s_row:e_row,:] = np.where(original_array == c, c, result_array[s_row:e_row,:]) # Modifying the output array
+        # Note that values are only changed in the output array and the input array remains unchangedS
+
+    for c in colours: # For each unique colour
+        (rows, cols) = np.where(x == c) # Row and column indices for the colour c
+        each_colour = x[min(rows):(max(rows) + 1),min(cols):(max(cols) + 1)] # Slicing the array based on row and col index
+
+        if each_colour.shape[0] < x_res.shape[0]: # No. of rows in colour subset < No. of rows in output array
+            replace_colour(each_colour, x_res) # Passing the subset and output array to 'replace_colour' function
+        elif each_colour.shape[1] < x_res.shape[1]: # No. of cols in colour subset < No. of cols in output array
+            t_each_colour = np.transpose(each_colour) # Transpose of the subset array
+            t_x_res = np.transpose(x_res) # Transpose of the output array
+            replace_colour(t_each_colour, t_x_res) # Passing the transposed arrays to 'replace_colour' function
+        else:
+            x_res = np.where(each_colour == c, c, x_res) # Modifying the output array when both arrays have the same shape
+            
+    return x_res # Return the transformed array 
 
 
 def solve_06df4c85(x):

@@ -64,3 +64,43 @@ When your output grid is ready, click the green "Submit!" button to check your a
 After you've obtained the correct answer for the current test input grid, you can switch to the next test input grid for the task using the "Next test input" button (if there is any available; most tasks only have one test input).
 
 When you're done with a task, use the "load task" button to open a new task.
+
+## Purpose of repository
+
+This repository has been primarily used for solving the below tasks using task specific programs that have been hand-coded. In all the solutions, numpy functions have been extremely useful in working with the given data. For the purpose of this assignment, I have chosen 5 tasks of varying difficulty levels. All the solutions are available in `src/manual_solve.py` with one `"solve_<ID>"` function to solve each task.
+
+### Task 1: `solve_c8cbb738`
+
+In this task, the dimensions of the output array depends on the sub-sets of arrays present in the input grid. Based on the different coloured sub-sets, we need to identify the dimension of the output grid. After selecting the correct output grid dimensions, all the different coloured sub-sets have to be superimposed together in the proper order to form the output grid.
+
+![test space](https://github.com/yagarwal1/ARC/blob/Development/apps/img/Task_1.PNG)
+
+### Task 2: `solve_06df4c85`
+
+For this task, the input grids have black squares (2 x 2) and few coloured squares (2 x 2) of different colours with a common border colour (eg. yellow in the below image). The goal is to identify pairs of same colored squares which are present on the same row (or) column, and replace the black squares between those pairs of coloured squares with the same colour. An important point to note in the image below is that, the red square on the top right should not be joined to the horizontal red grids as they are not present in the initial input array.
+
+![test space](https://github.com/yagarwal1/ARC/blob/Development/apps/img/Task_2.PNG)
+
+### Task 3: `solve_ded97339`
+
+This task is almost similar to task 2, in the sense that the code uses the same logic with a few tweaks in the function. As opposed to the previous task, all the grids in this task have only two colours - black and blue. Therefore, it is a little simpler in comparison to the previous task, as the squares are (1 x 1), have no borders and have only two colours. We need to find the pairs of blue squares on any row or column and join the pair of blue squares by replacing the black squares between them. 
+
+![test space](https://github.com/yagarwal1/ARC/blob/Development/apps/img/Task_3.PNG)
+
+### Task 4: `solve_3631a71a`
+
+An interesting task, which involved more thinking to simplify the logic and optimise the code, this essentially requires all the maroon (number 9) coloured squares to be replaced by the correct coloured square. The trick here is that the grid seems to be symmetrical, while it actually has two extra rows and columns on the top and left respectively, which are not present on their opposite side. However, every corresponding row and column has equal values (eg. r[0] == c[0]), making it symmetrical across the diagonal.
+
+![test space](https://github.com/yagarwal1/ARC/blob/Development/apps/img/Task_4.PNG)
+
+### Task 5: `solve_0d3d703e`
+
+The easiest of the five tasks, this one has a pretty straight-forward logic. It has four pairs of colours that are mapped to each other - (green <=> yellow), (indigo <=> grey), (red <=> pink) and (blue <=> maroon). The aim is to map each colour in the input grid to its pair.
+
+![test space](https://github.com/yagarwal1/ARC/blob/Development/apps/img/Task_5.PNG)
+
+## Summary
+
+All the tasks have been solved using the hand-coded python functions, which are task-specific. Each function has a single task-specific logic which has been used to successfully solve all the training and test grids. NumPy library has been used in the code as it makes working with arrays much easier and simpler. The functions for all the tasks make use of various numpy functions, such as numpy.where(), numpy.transpose() and numpy.unique(). Among the many numpy functions used, I believe numpy.where() has been used the most throughout the entire program. Also, numpy.transpose() was a highly useful function as it outputs a view of the original array. This makes it extremely easy to work with transposed matrices without the hassles of re-transposing the matrix as all the changes made to the transposed matrix are duplicated to the original matrix. Apart from the NumPy functions, Python features like list comprehensions and single-line 'for', 'if' loops have also been used throughout the program. 
+
+The Abstraction and Reasoning Corpus has a vast variety of tasks with varied levels of difficulty. Most of the tasks work by finding and replacing certain cells of the grid or certain indices of the cells. Also, there are a few tasks which follow the same logic, with a slight difference. For instance, tasks 2 and 3 explained above share the same high-level logic, which means that if an AI agent is trained on a set of high-level logics and also on techniques of tweaking the code to try different combinations, to use ARC as a benchmark for comparing general intelligence betwen AI systems and humans.

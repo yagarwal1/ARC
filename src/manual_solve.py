@@ -37,13 +37,36 @@ def solve_06df4c85(x):
 def solve_3631a71a(x):
     return x
 
-
 def solve_0d3d703e(x):
-    x_res = x.copy()    
-    map_dict = {1 : 5, 2 : 6, 3 : 4, 8 : 9}
-    for k, v in map_dict.items():
-        x_res = np.where(x == k, v, x_res) if np.any(x == k) else np.where(x == v, k, x_res)
-    return x_res
+    '''
+    Difficulty: Easy
+    
+    [3 1 2]  =>  [4 5 6]
+    [3 1 2]  =>  [4 5 6]
+    [3 1 2]  =>  [4 5 6]
+    
+    On analysing this task manually, it is clear that the colours are mapped to each other in a straight-forward manner.
+    For eg., the colour 'green (3)' always maps to 'yellow (4)' and vice-versa. Similarly, 'red (2)' and 'pink (6)' are
+    mapped with each other and so on.
+    
+    The below program solves this task by creating a dictionary of the colours that are mapped to each other as key-value 
+    pairs. Using this dictionary, the 'if-else' condition is used to check if the values of the numpy array contains the 
+    elements in 'keys' (eg. green) and replaces it with its corresponding 'value' (eg. yellow) using the numpy.where() 
+    function. Alternatively, if the array values are present in 'values' (eg. yellow), it is replaced by the corresponding 
+    'key' (eg. green). The input array is used for checking and the replacement is done on the output array only, so that
+    there are no changes to the original array.
+    
+    '''
+
+    x_res = x.copy() # Create a copy of the input array, to retain the original input array
+    map_dict = {1 : 5, 2 : 6, 3 : 4, 8 : 9} # Dictionary of colours that are mapped to each other
+
+    for k, v in map_dict.items(): # Iterate over the key-value pairs (i.e 4 times) in the dictionary 
+        # If value of "x" is in keys of the dictionary, all values of 'k' in "x_res" are replaced with 'v'
+        # Else, all values of 'v' in "x_res" are replaced with 'k' using np.where()
+        x_res = np.where(x == k, v, x_res) if np.any(x == k) else np.where(x == v, k, x_res) 
+
+    return x_res # Return the transformed array 
 
 
 def main():

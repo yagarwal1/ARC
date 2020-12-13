@@ -35,7 +35,39 @@ def solve_06df4c85(x):
 
 
 def solve_3631a71a(x):
-    return x
+    '''
+    Difficulty: Medium-to-difficult
+    
+    Using the ARC testing interface, two important observations can be made for this task:
+    1. The input grids are symmetrical, except for the first two ([0] and [1]) rows and columns
+    2. In the input grid, the colour represented by the value '9' needs to be replaced with the correct value to generate 
+       the output grid
+    
+    On further analysis, for all the train and test input grids, it can be seen that any empty values (i.e '9') in the 
+    first two rows/columns can be replaced by the value in the corresponding column/row. For instance, assuming the value 
+    in index x[i, j] is '9', it can be replaced by the value in index x[j, i]. 
+    
+    The above logic can also be applied to most of the empty values ('9') in the rest of the rows and columns -> x[2:, 2:],
+    provided that the value in x[j, i] is not equal to '9'. In case x[j, i] is also '9', then the correct value can be 
+    obtained from either the horrizontal or vertical mirror value (as they are symmetrical), by taking the row or column 
+    index value in reverse.
+    
+    The horizontal and vertical mirror values for any index is obtained by subtracting 1 from the original row or column 
+    index respectively, as this fetches the index in reverse. For eg. the mirror value for x[5, 14] would be x[5, 17] which
+    is the same as x[5, -13].
+    
+    '''
+    
+    x_res = x.copy() # Create a copy of the input array, to retain the original input array
+    rows, cols = np.where(x == 9) # Get the list of indices whose values need to be replaced (i.e) x == 9
+    for i, j in zip(rows, cols):
+        # If x[j, i] is not 9, replace x_res[i, j] with x[j, i]
+        # Else if the horizontal mirror value is not 9, replace x_res[i, j] with x[i, 1 - j]
+        # Else replace x_res[i, j] with the vertical mirror value, which is x[1 - i, j]
+        x_res[i, j] = x[j, i] if x[j, i] != 9 else (x[i, 1 - j] if x[i, 1 - j] != 9 else x[1 - i, j])  
+    
+    return x_res
+
 
 def solve_0d3d703e(x):
     '''
